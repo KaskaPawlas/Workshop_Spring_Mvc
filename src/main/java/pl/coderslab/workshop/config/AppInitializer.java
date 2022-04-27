@@ -1,6 +1,10 @@
-package pl.coderslab.workshop;
+package pl.coderslab.workshop.config;
 
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import pl.coderslab.workshop.config.AppConfig;
+
+import javax.servlet.Filter;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
@@ -16,5 +20,11 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        Filter encoding = new CharacterEncodingFilter("UTF-8", true);
+        return new Filter[]{encoding};
     }
 }

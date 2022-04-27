@@ -1,4 +1,4 @@
-package pl.coderslab.workshop;
+package pl.coderslab.workshop.model;
 
 public class Book {
     private Long id;
@@ -15,6 +15,13 @@ public class Book {
         this.author = author;
         this.publishingHouse = publishingHouse;
         this.genre = genre;
+    }
+
+    public Book() {
+    }
+
+    public Book(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

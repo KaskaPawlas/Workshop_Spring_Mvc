@@ -1,20 +1,18 @@
-package pl.coderslab.workshop;
+package pl.coderslab.workshop.service;
 
-import org.w3c.dom.ls.LSOutput;
+import org.springframework.stereotype.Component;
+import pl.coderslab.workshop.model.Book;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class MockBookService {
+@Component
+public class RepositoryBookService implements BookService{
 
     private List<Book> list;
     private static Long nextId = 6L;
 
-    public MockBookService() {
+    public RepositoryBookService() {
         list = new ArrayList<>();
         list.add(new Book(1L, "9788324064212", "W środku jesteśmy baśnią", "Wiesław Myśliwski", "Znak", "biography"));
         list.add(new Book(2L, "9788324079384", "Vetulani. Piękny umysł, dzikie serce", "Katarzyna Kubisiowska", "Znak", "biography"));
@@ -29,24 +27,40 @@ public class MockBookService {
         return nextId;
     }
 
+    @Override
+    public Book getBookById(Long bookId) {
+        Book bookToFind = new Book();
+        for (Book book : list) {
+            if (book.getId().equals(bookId)) {
+                bookToFind = book;
+            }
+        }
+        return bookToFind;
+    }
 
-    public List<Book> allBooks(){
+    @Override
+    public Book addBook(Book bookToAdd) {
+        bookToAdd.setId(nextId++);
+        list.add(bookToAdd);
+        return bookToAdd;
+    }
+
+    @Override
+    public void editBook(Book bookToEdit) {
+        int editIndex = list.indexOf(bookToEdit.getId());
+        list.set(editIndex, bookToEdit);
+    }
+
+    @Override
+    public void deleteBook(Long bookId) {
+        list.removeIf(book -> book.getId().equals(bookId));
+    }
+
+    @Override
+    public List<Book> findAllBooks() {
         return list;
     }
 
-    public void addBook(Book book){
-        list.add(book);
-    }
-    public void deleteBook(Long bookId){
-        list.remove(bookId);
-    }
-    public void editBook(Long bookId){
-        Optional<Book> optionalBook = list.stream().filter(book -> book.getId().equals(bookId)).findFirst();
-        optionalBook.
 
-    }
-    public Book showBookById(Long bookId){
-        List<Book> showBook = list.stream().filter(book -> book.getId().equals(bookId)).collect(Collectors.toList());
-        return (Book) showBook;
-    }
+
 }
