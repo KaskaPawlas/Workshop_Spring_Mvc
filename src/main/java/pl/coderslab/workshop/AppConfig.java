@@ -1,4 +1,4 @@
-package pl.coderslab.workshop.config;
+package pl.coderslab.workshop;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

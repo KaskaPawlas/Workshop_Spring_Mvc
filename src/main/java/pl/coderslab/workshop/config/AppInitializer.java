@@ -2,7 +2,7 @@ package pl.coderslab.workshop.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-import pl.coderslab.workshop.config.AppConfig;
+import pl.coderslab.workshop.AppConfig;
 
 import javax.servlet.Filter;
 
